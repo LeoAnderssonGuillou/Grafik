@@ -25,7 +25,6 @@ namespace Grafik_Project
             while (!Raylib.WindowShouldClose())
             {
                 Raylib.BeginDrawing();
-
                 Color lit = new Color(255, green, 0, 255);
                 Raylib.ClearBackground(lit);
                 cycle++;
@@ -62,7 +61,28 @@ namespace Grafik_Project
                 xDistance = xDistance + xSpeed;
                 yDistance = yDistance + ySpeed;
 
-                if (xSpeed > 0)
+                if (xDistance > 698)
+                {
+                    xDistance = 698;
+                    xSpeed = 0f;
+                }
+                if (xDistance < 0)
+                {
+                    xDistance = 0;
+                    xSpeed = 0f;
+                }
+                if (yDistance > 480)
+                {
+                    yDistance = 480;
+                    ySpeed = 0f;
+                }
+                if (yDistance < 0)
+                {
+                    yDistance = 0;
+                    ySpeed = 0f;
+                }
+
+                if (xDistance <= 800)
                 {
                     xSpeed = xSpeed - 0.00005f;
                 }
@@ -88,9 +108,7 @@ namespace Grafik_Project
                     Raylib.DrawTexture(walter, (int)xDistance, (int)yDistance, Color.WHITE);
                 }
 
-
                 Raylib.EndDrawing();
-
             }
         }
     }
