@@ -20,14 +20,14 @@ namespace Grafik_Project
             float yDistance = 0;
             float xSpeed = 0;
             float ySpeed = 0;
-            float acc = 0.0004f;
+            float acc = 0.0012f;
             bool moving = true;
 
-            float friction = 0.0001f;
+            float friction = 0.0003f;
 
             float xFloppSpeed = 0f;
             float yFloppSpeed = 0f;
-            float floppAcc = 0.0002f;
+            float floppAcc = 0.0006f;
             float xFloppLoc = 0;
             float yFloppLoc = 0;
 
