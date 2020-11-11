@@ -12,10 +12,11 @@ namespace Grafik_Project
             int green = 0;
             int more = 1;
 
-            Texture2D walter = Raylib.LoadTexture("walter.png");
-            Texture2D walter2 = Raylib.LoadTexture("walter2.png");
-            Texture2D floppa = Raylib.LoadTexture("floppa.png");
+            Texture2D walterT = Raylib.LoadTexture("walter.png");
+            Texture2D walterT2 = Raylib.LoadTexture("walter2.png");
+            Texture2D floppaT = Raylib.LoadTexture("floppa.png");
 
+            Rectangle walter = new Rectangle(0, 0, 80, 80);
             float xDistance = 0;
             float yDistance = 0;
             float xSpeed = 0;
@@ -25,6 +26,7 @@ namespace Grafik_Project
 
             float friction = 0.0003f;
 
+            Rectangle floppa = new Rectangle(0, 0, 120, 120);
             float xFloppSpeed = 0f;
             float yFloppSpeed = 0f;
             float floppAcc = 0.0006f;
@@ -35,6 +37,7 @@ namespace Grafik_Project
             string gameState = "menu";
             while (!Raylib.WindowShouldClose())
             {
+                //Menu
                 if (gameState == "menu")
                 {
                     Color yellow = new Color(255, 255, 0, 255);
@@ -87,50 +90,49 @@ namespace Grafik_Project
                     }
 
                     //Change Walter location with speed
-                    xDistance = xDistance + xSpeed;
-                    yDistance = yDistance + ySpeed;
-
+                    walter.x += xSpeed;
+                    walter.y += ySpeed;
 
                     //Move Floppa towards Walter
-                    if (xFloppLoc > xDistance)
+                    if (floppa.x > walter.x)
                     {
                         xFloppSpeed = xFloppSpeed - floppAcc;
                     }
-                    if (xFloppLoc < xDistance)
+                    if (floppa.x < walter.x)
                     {
                         xFloppSpeed = xFloppSpeed + floppAcc;
                     }
-                    if (yFloppLoc > yDistance)
+                    if (floppa.y > walter.y)
                     {
                         yFloppSpeed = yFloppSpeed - floppAcc;
                     }
-                    if (yFloppLoc < yDistance)
+                    if (floppa.y < walter.y)
                     {
                         yFloppSpeed = yFloppSpeed + floppAcc;
                     }
 
-                    xFloppLoc = xFloppLoc + xFloppSpeed;
-                    yFloppLoc = yFloppLoc + yFloppSpeed;
+                    floppa.x += xFloppSpeed;
+                    floppa.y += yFloppSpeed;
 
                     //Walter borders
-                    if (xDistance > 920)
+                    if (walter.x > 920)
                     {
-                        xDistance = 920;
+                        walter.x = 920;
                         xSpeed = 0f;
                     }
-                    if (xDistance < 0)
+                    if (walter.x < 0)
                     {
-                        xDistance = 0;
+                        walter.x = 0;
                         xSpeed = 0f;
                     }
-                    if (yDistance > 670)
+                    if (walter.y > 670)
                     {
-                        yDistance = 670;
+                        walter.y = 670;
                         ySpeed = 0f;
                     }
-                    if (yDistance < 0)
+                    if (walter.y < 0)
                     {
-                        yDistance = 0;
+                        walter.y = 0;
                         ySpeed = 0f;
                     }
 
@@ -195,14 +197,14 @@ namespace Grafik_Project
                     //Draw characters
                     if (moving == true)
                     {
-                        Raylib.DrawTexture(walter2, (int)xDistance, (int)yDistance, Color.WHITE);
+                        Raylib.DrawTexture(walterT2, (int)walter.x, (int)walter.y, Color.WHITE);
                     }
                     else
                     {
-                        Raylib.DrawTexture(walter, (int)xDistance, (int)yDistance, Color.WHITE);
+                        Raylib.DrawTexture(walterT, (int)walter.x, (int)walter.y, Color.WHITE);
                     }
 
-                    Raylib.DrawTexture(floppa, (int)xFloppLoc, (int)yFloppLoc, Color.WHITE);
+                    Raylib.DrawTexture(floppaT, (int)floppa.x, (int)floppa.y, Color.WHITE);
                 }
                 Raylib.EndDrawing();
             }
